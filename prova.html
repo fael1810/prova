@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333; /* Cinza */
+    color: #000; /* Preto */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #f8d7da; /* Vermelho claro */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: #000; /* Preto */
+}
+
+input[type="text"],
+input[type="number"],
+button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+    background-color: #f5c6cb; /* Vermelho claro */
+    color: #000; /* Preto */
+}
+
+button {
+    background-color: #dc3545; /* Vermelho escuro */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #c82333; /* Vermelho mais escuro */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: #000; /* Preto */
+}
+
+th, td {
+    border: 1px solid #000; /* Preto */
+    padding: 8px;
+    text-align: center;
+}
+
+thead {
+    background-color:#c04852 /* Vermelho claro */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #c04852 /* Vermelho claro */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #c04852; /* Vermelho claro */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Formulário</h2>
+
+  <form id="form">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome"><br>
+
+    <label for="matricula">Matrícula:</label>
+    <input type="text" id="matricula" name="matricula"><br>
+
+    <label for="nota1">Nota 1:</label>
+    <input type="number" id="nota1" name="nota1" min="0" max="10"><br>
+
+    <label for="nota2">Nota 2:</label>
+    <input type="number" id="nota2" name="nota2" min="0" max="10"><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <table id="tabela" style="display:none;">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Matrícula</th>
+        <th>Nota 1</th>
+        <th>Nota 2</th>
+        <th>Média</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-corpo">
+    </tbody>
+  </table>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var nome = document.getElementById("nome").value;
+  var matricula = document.getElementById("matricula").value;
+  var nota1 = parseFloat(document.getElementById("nota1").value);
+  var nota2 = parseFloat(document.getElementById("nota2").value);
+  var media = (nota1 + nota2) / 2;
+  var situacao = (media >= 5) ? "Aprovado" : "Reprovado";
+
+  var tabelaCorpo = document.getElementById("tabela-corpo");
+  var novaLinha = tabelaCorpo.insertRow();
+  var celulaNome = novaLinha.insertCell(0);
+  var celulaMatricula = novaLinha.insertCell(1);
+  var celulaNota1 = novaLinha.insertCell(2);
+  var celulaNota2 = novaLinha.insertCell(3);
+  var celulaMedia = novaLinha.insertCell(4);
+  var celulaSituacao = novaLinha.insertCell(5);
+
+  celulaNome.innerHTML = nome;
+  celulaMatricula.innerHTML = matricula;
+  celulaNota1.innerHTML = nota1;
+  celulaNota2.innerHTML = nota2;
+  celulaMedia.innerHTML = media.toFixed(2);
+  celulaSituacao.innerHTML = situacao;
+
+  document.getElementById("tabela").style.display = "block";
+});
+</script>
+
+</body>
+</html>
